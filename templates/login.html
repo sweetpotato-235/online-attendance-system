@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Staff login{% endblock %}
+{% block content %}
+<div class="login-layout">
+  <section class="login-intro"><span class="eyebrow">STAFF ACCESS</span><h1>Welcome<br>back.</h1><p>Sign in to manage student attendance and school records.</p><div class="login-shield">✓ <span>Authorized staff only</span></div></section>
+  <section class="login-card">
+    <h2>Sign in</h2><p class="muted">Enter your staff account details.</p>
+    <form method="post" autocomplete="on">
+      <div class="mb-3"><label class="form-label" for="username">Username</label><input class="form-control form-control-lg" id="username" name="username" required autocomplete="username" autofocus></div>
+      <div class="mb-4"><label class="form-label" for="password">Password</label><input class="form-control form-control-lg" id="password" name="password" type="password" required autocomplete="current-password"></div>
+      <button class="btn btn-primary btn-lg w-100" type="submit">Sign in securely</button>
+    </form>
+    <div class="secure-note">Your account role determines which features you can access.</div>
+  </section>
+</div>
+{% endblock %}

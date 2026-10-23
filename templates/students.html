@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">ADMINISTRATION</span><h1>Students</h1><p>Maintain student admission details and class allocation.</p></div></div>
+<div class="content-card mb-4"><h2 class="card-title">Add a student</h2>
+<form method="post" class="row g-3"><div class="col-md-3"><label class="form-label">Admission number</label><input class="form-control" name="admission_no" required maxlength="40"></div><div class="col-md-5"><label class="form-label">Full name</label><input class="form-control" name="full_name" required maxlength="120"></div><div class="col-md-4"><label class="form-label">Class and section</label><select class="form-select" name="class_id" required><option value="">Choose class</option>{% for c in classes %}<option value="{{ c.id }}">{{ c.name }} · {{ c.section }}</option>{% endfor %}</select></div><div class="col-12"><button class="btn btn-primary">Add student</button>{% if not classes %}<span class="text-danger ms-2">Create a class/section first.</span>{% endif %}</div></form>
+</div>
+<div class="content-card"><div class="section-heading"><div><h2>Student directory</h2><p>{{ students|length }} active student(s) found.</p></div></div>
+<form method="get" class="filter-row mb-3"><input class="form-control" name="q" placeholder="Search name or admission no." value="{{ q }}"><select class="form-select" name="class_id"><option value="">All classes</option>{% for c in classes %}<option value="{{ c.id }}" {% if class_filter == c.id %}selected{% endif %}>{{ c.name }} · {{ c.section }}</option>{% endfor %}</select><button class="btn btn-outline-primary">Filter</button><a class="btn btn-light" href="{{ url_for('students') }}">Reset</a></form>
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th>Admission no.</th><th>Student name</th><th>Class</th><th>Action</th></tr></thead><tbody>
+{% for s in students %}<tr><td>{{ s.admission_no }}</td><td class="fw-semibold">{{ s.full_name }}</td><td>{{ s.school_class.name }} · {{ s.school_class.section }}</td><td><form method="post" action="{{ url_for('toggle_student', student_id=s.id) }}" onsubmit="return confirm('Deactivate this student? Existing attendance will be retained.');"><button class="btn btn-sm btn-outline-danger">Deactivate</button></form></td></tr>{% else %}<tr><td colspan="4" class="text-center py-4 muted">No students match this search.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

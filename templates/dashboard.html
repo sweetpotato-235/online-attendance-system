@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">OVERVIEW</span><h1>Good day, {{ user.username }}.</h1><p>Here is the current attendance snapshot.</p></div><a href="{{ url_for('attendance') }}" class="btn btn-primary">＋ Mark attendance</a></div>
+<div class="stats-grid">
+  <div class="stat-card"><span class="stat-label">Active students</span><strong>{{ student_count }}</strong><small>Across all classes</small></div>
+  <div class="stat-card"><span class="stat-label">Classes & sections</span><strong>{{ class_count }}</strong><small>Configured in the system</small></div>
+  <div class="stat-card"><span class="stat-label">Records today</span><strong>{{ today_count }}</strong><small>Attendance entries saved</small></div>
+  <div class="stat-card"><span class="stat-label">Marked present today</span><strong>{{ present_today }}</strong><small>From today's records</small></div>
+</div>
+<div class="content-card mt-4">
+  <div class="section-heading"><div><h2>Recent attendance</h2><p>Latest saved records across the school.</p></div><a class="text-link" href="{{ url_for('reports') }}">View reports →</a></div>
+  {% if recent %}
+  <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Student</th><th>Class</th><th>Date</th><th>Status</th><th>Marked by</th></tr></thead><tbody>
+  {% for r in recent %}<tr><td class="fw-semibold">{{ r.student.full_name }}</td><td>{{ r.student.school_class.name }} · {{ r.student.school_class.section }}</td><td>{{ r.attendance_date.strftime('%d %b %Y') }}</td><td><span class="status-pill status-{{ r.status|lower|replace(' ', '-') }}">{{ r.status }}</span></td><td>{{ r.marker.username }}</td></tr>{% endfor %}
+  </tbody></table></div>{% else %}<div class="empty-state"><div class="empty-symbol">✓</div><h3>No attendance recorded yet</h3><p>Add classes and students, then start marking attendance.</p>{% if user.role == 'admin' %}<a class="btn btn-outline-primary" href="{{ url_for('students') }}">Add students</a>{% endif %}</div>{% endif %}
+</div>
+{% endblock %}

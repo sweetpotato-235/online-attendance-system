@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Classes{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">ADMINISTRATION</span><h1>Classes & sections</h1><p>Create the class and section options used throughout attendance.</p></div></div>
+<div class="content-card mb-4"><h2 class="card-title">Add a class/section</h2><form method="post" class="row g-3 align-items-end"><div class="col-md-5"><label class="form-label">Class name</label><input class="form-control" name="name" placeholder="e.g. Class 10" required maxlength="40"></div><div class="col-md-3"><label class="form-label">Section</label><input class="form-control" name="section" value="A" required maxlength="20"></div><div class="col-md-4"><button class="btn btn-primary">Add class/section</button></div></form></div>
+<div class="content-card"><h2 class="card-title">Configured classes</h2><div class="table-responsive"><table class="table"><thead><tr><th>Class</th><th>Section</th><th>Active students</th></tr></thead><tbody>{% for c in classes %}<tr><td>{{ c.name }}</td><td>{{ c.section }}</td><td>{{ c.students|selectattr('active')|list|length }}</td></tr>{% else %}<tr><td colspan="3" class="muted">No classes have been added.</td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

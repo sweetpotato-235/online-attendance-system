@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<section class="hero-panel">
+  <div class="hero-copy">
+    <span class="eyebrow">SCHOOL ATTENDANCE PORTAL</span>
+    <h1>Attendance, made<br><span>clear and simple.</span></h1>
+    <p>One secure place for school staff to record daily attendance, find student records, and review attendance summaries.</p>
+    <a class="btn btn-primary btn-lg mt-2" href="{{ url_for('login') }}">Staff sign in <span aria-hidden="true">→</span></a>
+    <div class="hero-meta"><span class="meta-check">✓</span> Responsive · Browser-based · Role-protected</div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+    <div class="attendance-card">
+      <div class="art-card-head"><span>Today's overview</span><span class="live-dot"></span></div>
+      <div class="art-number">Attendance <strong>✓</strong></div>
+      <div class="art-line"><span></span><span></span><span></span></div>
+      <div class="art-row"><i class="status-icon present">✓</i><div><b>Present</b><small>Recorded by staff</small></div><span class="row-tag">P</span></div>
+      <div class="art-row"><i class="status-icon absent">×</i><div><b>Absent</b><small>Follow-up if needed</small></div><span class="row-tag">A</span></div>
+      <div class="art-row"><i class="status-icon leave">↗</i><div><b>On leave</b><small>Clear attendance history</small></div><span class="row-tag">L</span></div>
+    </div>
+    <div class="floating-badge"><span>✓</span> Records organized</div>
+  </div>
+</section>
+<section class="feature-grid">
+  <article class="feature-card"><div class="feature-icon">01</div><h3>Simple attendance</h3><p>Record daily status by class and section.</p></article>
+  <article class="feature-card"><div class="feature-icon">02</div><h3>Useful reports</h3><p>Review date ranges and attendance percentages.</p></article>
+  <article class="feature-card"><div class="feature-icon">03</div><h3>Staff access</h3><p>Administrator and teacher accounts with different permissions.</p></article>
+</section>
+{% endblock %}
